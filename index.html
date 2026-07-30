@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Galaxy Task Sphere</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="games/snake.css">
+<link rel="stylesheet" href="games/tictactoe.css">
+<link rel="stylesheet" href="games/memory.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+
+</head>
+
+<body>
+
+<!-- ========================================= -->
+<!-- SIDEBAR -->
+<!-- ========================================= -->
+
+<div id="overlay"></div>
+
+<aside id="sidebar">
+
+<div class="logo">
+
+<div class="logo-circle">
+<i class="fa-solid fa-galaxy"></i>
+</div>
+
+<div>
+
+<h2>Galaxy Task Sphere</h2>
+
+<p>Everything in One Place</p>
+
+</div>
+
+</div>
+
+<nav>
+
+<button class="navButton active" data-page="home">
+<i class="fa-solid fa-house"></i>
+<span>Home</span>
+</button>
+
+<button class="navButton" data-page="ai">
+<i class="fa-solid fa-robot"></i>
+<span>Nova AI</span>
+</button>
+
+<button class="navButton" data-page="games">
+<i class="fa-solid fa-gamepad"></i>
+<span>Games</span>
+</button>
+
+<button class="navButton" data-page="calculator">
+<i class="fa-solid fa-calculator"></i>
+<span>Calculator</span>
+</button>
+
+<button class="navButton" data-page="quiz">
+<i class="fa-solid fa-circle-question"></i>
+<span>Quiz</span>
+</button>
+
+<button class="navButton" data-page="clock">
+<i class="fa-regular fa-clock"></i>
+<span>Clock</span>
+</button>
+
+<button class="navButton" data-page="stopwatch">
+<i class="fa-solid fa-stopwatch"></i>
+<span>Stopwatch</span>
+</button>
+
+<button class="navButton" data-page="timer">
+<i class="fa-solid fa-hourglass-half"></i>
+<span>Timer</span>
+</button>
+
+<button class="navButton" data-page="qrcode">
+<i class="fa-solid fa-qrcode"></i>
+<span>QR Generator</span>
+</button>
+
+<button class="navButton" data-page="notes">
+<i class="fa-solid fa-note-sticky"></i>
+<span>Notes</span>
+</button>
+
+<button class="navButton" data-page="todo">
+<i class="fa-solid fa-list-check"></i>
+<span>To-Do</span>
+</button>
+
+<button class="navButton" data-page="weather">
+<i class="fa-solid fa-cloud-sun"></i>
+<span>Weather</span>
+</button>
+
+<button class="navButton" data-page="about">
+<i class="fa-solid fa-circle-info"></i>
+<span>About</span>
+</button>
+
+</nav>
+
+</aside>
+
+<!-- ========================================= -->
+<!-- MAIN -->
+<!-- ========================================= -->
+
+<div id="main">
+
+<header>
+
+<button id="menuButton">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<div class="title">
+
+<h1>Galaxy Task Sphere</h1>
+
+<p>Your complete productivity and AI workspace</p>
+
+</div>
+
+</header>
+
+<main id="content">
+
+<!-- ========================================= -->
+<!-- HOME PAGE -->
+<!-- ========================================= -->
+
+<section class="page active" id="home">
+
+<div class="hero">
+
+<h1>
+Welcome to
+<span>Galaxy Task Sphere</span>
+</h1>
+
+<p>
+
+A modern workspace combining AI, Games, Utilities,
+Productivity tools and much more in a single website.
+
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card openPage" data-open="ai">
+
+<i class="fa-solid fa-robot"></i>
+
+<h3>Nova AI</h3>
+
+<p>
+
+Powerful AI assistant capable of answering questions,
+writing code and solving problems.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="games">
+
+<i class="fa-solid fa-gamepad"></i>
+
+<h3>Games</h3>
+
+<p>
+
+Enjoy a collection of browser games without downloads.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="calculator">
+
+<i class="fa-solid fa-calculator"></i>
+
+<h3>Calculator</h3>
+
+<p>
+
+Scientific calculator with keyboard support.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="quiz">
+
+<i class="fa-solid fa-circle-question"></i>
+
+<h3>Quiz</h3>
+
+<p>
+
+Test your knowledge with interactive quizzes.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="clock">
+
+<i class="fa-regular fa-clock"></i>
+
+<h3>Clock</h3>
+
+<p>
+
+Live digital clock with date.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="stopwatch">
+
+<i class="fa-solid fa-stopwatch"></i>
+
+<h3>Stopwatch</h3>
+
+<p>
+
+Accurate stopwatch with lap recording.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="timer">
+
+<i class="fa-solid fa-hourglass-half"></i>
+
+<h3>Countdown Timer</h3>
+
+<p>
+
+Simple and elegant countdown timer.
+
+</p>
+
+</div>
+
+<div class="card openPage" data-open="qrcode">
+
+<i class="fa-solid fa-qrcode"></i>
+
+<h3>QR Generator</h3>
+
+<p>
+
+Generate QR codes instantly.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- NOVA AI -->
+<!-- ========================================= -->
+
+<section class="page" id="ai">
+
+<div class="aiContainer">
+
+<div class="chatHeader">
+
+<div class="chatTitle">
+
+<i class="fa-solid fa-robot"></i>
+
+<div>
+
+<h2>Nova AI Assistant</h2>
+
+<p>Powered by Gemini</p>
+
+</div>
+
+</div>
+
+<div class="chatActions">
+
+<button id="newChatBtn">
+<i class="fa-solid fa-plus"></i>
+New Chat
+</button>
+
+<button id="clearChatBtn">
+<i class="fa-solid fa-trash"></i>
+Clear
+</button>
+
+</div>
+
+</div>
+
+<div id="chatMessages">
+
+<div class="message ai">
+
+<div class="avatar aiAvatar">
+
+<i class="fa-solid fa-robot"></i>
+
+</div>
+
+<div class="bubble">
+
+<h3>Welcome 👋</h3>
+
+<p>
+
+Hello! I'm Nova AI.
+
+Ask me anything including:
+
+</p>
+
+<ul>
+
+<li>Programming</li>
+
+<li>Mathematics</li>
+
+<li>Science</li>
+
+<li>Writing</li>
+
+<li>Ideas</li>
+
+<li>Homework</li>
+
+<li>General Questions</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="suggestions">
+
+<button class="suggestion">
+Explain Quantum Computing
+</button>
+
+<button class="suggestion">
+Write Python Snake Game
+</button>
+
+<button class="suggestion">
+Create HTML Portfolio
+</button>
+
+<button class="suggestion">
+Tell me a joke
+</button>
+
+</div>
+
+<div class="chatInput">
+
+<textarea
+id="prompt"
+rows="1"
+placeholder="Ask Nova AI anything..."></textarea>
+
+<button id="sendButton">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- GAMES -->
+<!-- ========================================= -->
+
+<section class="page" id="games">
+
+<h2 class="pageHeading">
+
+<i class="fa-solid fa-gamepad"></i>
+
+Games Collection
+
+</h2>
+
+<div class="toolGrid">
+
+<div class="toolCard launchGame" data-game="snake">
+
+<i class="fa-solid fa-dragon"></i>
+
+<h3>Snake</h3>
+
+<p>Classic Snake Game</p>
+
+</div>
+
+<div class="toolCard launchGame" data-game="tictactoe">
+
+<i class="fa-solid fa-x"></i>
+
+<h3>Tic Tac Toe</h3>
+
+<p>Play against AI</p>
+
+</div>
+
+<div class="toolCard launchGame"
+data-game="memory">
+
+<i class="fa-solid fa-brain"></i>
+
+<h3>Memory</h3>
+
+<p>Improve memory</p>
+
+</div>
+
+<div class="toolCard launchGame"
+data-game="2048">
+
+<i class="fa-solid fa-table-cells-large"></i>
+
+<h3>2048</h3>
+
+<p>Reach 2048</p>
+
+</div>
+
+<div class="toolCard launchGame"
+data-game="flappy">
+
+<i class="fa-solid fa-dove"></i>
+
+<h3>Flappy Bird</h3>
+
+<p>Avoid obstacles</p>
+
+</div>
+
+<div class="toolCard launchGame"
+data-game="reaction">
+
+<i class="fa-solid fa-bolt"></i>
+
+<h3>Reaction Test</h3>
+
+<p>Test your speed</p>
+
+</div>
+
+</div>
+
+<div id="gameArea"></div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- CALCULATOR -->
+<!-- ========================================= -->
+
+<section class="page" id="calculator">
+
+<h2 class="pageHeading">
+
+<i class="fa-solid fa-calculator"></i>
+
+Calculator
+
+</h2>
+
+<div class="calculator">
+
+<input
+type="text"
+id="calcDisplay"
+readonly>
+
+<div class="calcButtons">
+
+<button>(</button>
+<button>)</button>
+<button>%</button>
+<button class="operator">÷</button>
+
+<button>7</button>
+<button>8</button>
+<button>9</button>
+<button class="operator">×</button>
+
+<button>4</button>
+<button>5</button>
+<button>6</button>
+<button class="operator">−</button>
+
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button class="operator">+</button>
+
+<button>0</button>
+<button>.</button>
+<button id="calcClear">C</button>
+<button id="calcEqual">=</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- QUIZ -->
+<!-- ========================================= -->
+
+<section class="page" id="quiz">
+
+<h2 class="pageHeading">
+
+<i class="fa-solid fa-circle-question"></i>
+
+Quiz
+
+</h2>
+
+<div class="quizBox">
+
+<h3 id="question">
+
+Loading...
+
+</h3>
+
+<div id="answers"></div>
+
+<button id="nextQuestion">
+
+Next Question
+
+</button>
+
+</div>
+
+</section>
+<!-- ========================================= -->
+<!-- CLOCK -->
+<!-- ========================================= -->
+
+<section class="page" id="clock">
+
+    <h2 class="pageHeading">
+        <i class="fa-regular fa-clock"></i>
+        Digital Clock
+    </h2>
+
+    <div class="clockContainer">
+
+        <div id="digitalClock">
+            00:00:00
+        </div>
+
+        <div id="clockDate">
+            Monday, 1 January 2026
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- STOPWATCH -->
+<!-- ========================================= -->
+
+<section class="page" id="stopwatch">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-stopwatch"></i>
+
+        Stopwatch
+
+    </h2>
+
+    <div class="stopwatchBox">
+
+        <div id="stopwatchDisplay">
+
+            00:00:00.000
+
+        </div>
+
+        <div class="stopwatchButtons">
+
+            <button id="startStopwatch">
+
+                Start
+
+            </button>
+
+            <button id="pauseStopwatch">
+
+                Pause
+
+            </button>
+
+            <button id="resetStopwatch">
+
+                Reset
+
+            </button>
+
+            <button id="lapStopwatch">
+
+                Lap
+
+            </button>
+
+        </div>
+
+        <div id="laps"></div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- TIMER -->
+<!-- ========================================= -->
+
+<section class="page" id="timer">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-hourglass-half"></i>
+
+        Countdown Timer
+
+    </h2>
+
+    <div class="timerContainer">
+
+        <div class="timerInputs">
+
+            <input
+                id="timerHours"
+                type="number"
+                min="0"
+                max="99"
+                placeholder="HH">
+
+            <input
+                id="timerMinutes"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="MM">
+
+            <input
+                id="timerSeconds"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="SS">
+
+        </div>
+
+        <div id="timerDisplay">
+
+            00:00:00
+
+        </div>
+
+        <div class="timerButtons">
+
+            <button id="timerStart">
+
+                Start
+
+            </button>
+
+            <button id="timerPause">
+
+                Pause
+
+            </button>
+
+            <button id="timerReset">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- QR CODE -->
+<!-- ========================================= -->
+
+<section class="page" id="qrcode">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-qrcode"></i>
+
+        QR Code Generator
+
+    </h2>
+
+    <div class="qrContainer">
+
+        <input
+            id="qrText"
+            type="text"
+            placeholder="Enter text or URL">
+
+        <button id="generateQR">
+
+            Generate QR
+
+        </button>
+
+        <div id="qrResult"></div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- NOTES -->
+<!-- ========================================= -->
+
+<section class="page" id="notes">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-note-sticky"></i>
+
+        Notes
+
+    </h2>
+
+    <div class="notesContainer">
+
+        <textarea
+            id="notesArea"
+            placeholder="Write your notes here..."></textarea>
+
+        <button id="saveNotes">
+
+            Save Notes
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- TODO -->
+<!-- ========================================= -->
+
+<section class="page" id="todo">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-list-check"></i>
+
+        To-Do List
+
+    </h2>
+
+    <div class="todoContainer">
+
+        <div class="todoInput">
+
+            <input
+                id="todoText"
+                placeholder="New Task">
+
+            <button id="addTodo">
+
+                Add
+
+            </button>
+
+        </div>
+
+        <ul id="todoList"></ul>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- WEATHER -->
+<!-- ========================================= -->
+
+<section class="page" id="weather">
+
+    <h2 class="pageHeading">
+
+        <i class="fa-solid fa-cloud-sun"></i>
+
+        Weather
+
+    </h2>
+
+    <div class="weatherContainer">
+
+        <input
+            id="weatherCity"
+            placeholder="Enter city">
+
+        <button id="getWeather">
+
+            Search
+
+        </button>
+
+        <div id="weatherResult">
+
+            Search for any city to view weather.
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- ABOUT -->
+<!-- ========================================= -->
+
+<section class="page" id="about">
+
+    <div class="aboutBox">
+
+        <h2>
+
+            Galaxy Task Sphere
+
+        </h2>
+
+        <p>
+
+            Galaxy Task Sphere is an all-in-one productivity
+            platform that combines AI, games,
+            calculators, utilities and many useful
+            tools inside a single modern website.
+
+        </p>
+
+        <div class="featureGrid">
+
+            <div class="feature">
+                <i class="fa-solid fa-robot"></i>
+                <span>AI Assistant</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Games</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-calculator"></i>
+                <span>Calculator</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>QR Generator</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <span>Weather</span>
+            </div>
+
+            <div class="feature">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Productivity</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.2.1/marked.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+<script src="games/snake.js"></script>
+<script src="games/tictactoe.js"></script>
+<script src="games/memory.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
