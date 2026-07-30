@@ -69,13 +69,6 @@ console.log(`Loaded ${apiKeys.length} Gemini API Key(s).`);
 ========================================================== */
 
 const MODELS = [
-
-    "gemini-3.5-flash",
-
-    "gemini-3.5-flash-lite",
-
-    "gemini-2.5-flash",
-
     "gemini-flash-latest"
 
 ];
