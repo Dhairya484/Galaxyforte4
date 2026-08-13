@@ -1,954 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Galaxy Task Sphere</title>
+<title>GalaxyForte 4</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="games/snake.css">
-<link rel="stylesheet" href="games/tictactoe.css">
-<link rel="stylesheet" href="games/memory.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+:root {
+    --bg: #f4f7ff;
+    --card: rgba(255,255,255,0.75);
+    --text: #171a2b;
+    --muted: #73798c;
+    --border: rgba(255,255,255,0.8);
+    --shadow: 0 15px 40px rgba(40,50,100,0.10);
+}
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+body.dark {
+    --bg: #0c1020;
+    --card: rgba(25,30,52,0.8);
+    --text: #ffffff;
+    --muted: #a5abc0;
+    --border: rgba(255,255,255,0.08);
+    --shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+body {
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #c7d2ff 0, transparent 30%),
+        radial-gradient(circle at 90% 20%, #ffd5e8 0, transparent 30%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 25px;
+    transition: 0.3s;
+}
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+.dashboard {
+    max-width: 1150px;
+    margin: auto;
+}
 
+/* HEADER */
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: inline-flex;
+    width: 70px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    font-size: 35px;
+    margin-bottom: 15px;
+
+    background: linear-gradient(135deg,#6c63ff,#9b5cff);
+    box-shadow: 0 12px 30px rgba(108,99,255,0.3);
+}
+
+header h1 {
+    font-size: clamp(30px,5vw,48px);
+    margin-bottom: 8px;
+}
+
+header p {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+/* TOP BAR */
+
+.topbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.search {
+    flex: 1;
+    position: relative;
+}
+
+.search input {
+    width: 100%;
+    padding: 15px 20px 15px 48px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    outline: none;
+    background: var(--card);
+    backdrop-filter: blur(15px);
+    color: var(--text);
+    font-size: 15px;
+    box-shadow: var(--shadow);
+}
+
+.search span {
+    position: absolute;
+    left: 18px;
+    top: 14px;
+    font-size: 20px;
+}
+
+.theme {
+    width: 52px;
+    border: none;
+    border-radius: 16px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+
+/* SECTIONS */
+
+section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.section-title h2 {
+    font-size: 22px;
+}
+
+.section-title span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+    gap: 18px;
+}
+
+/* CARDS */
+
+.button {
+    position: relative;
+    min-height: 145px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    text-decoration: none;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+
+    background: var(--card);
+    backdrop-filter: blur(18px);
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s,
+        box-shadow 0.25s;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    top: -45px;
+    right: -45px;
+    opacity: 0.15;
+}
+
+.button:hover {
+    transform: translateY(-7px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(40,50,100,0.18);
+}
+
+.icon {
+    font-size: 38px;
+}
+
+.name {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.desc {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* GAME COLORS */
+
+.game::before {
+    background: #6c63ff;
+}
+
+.game .icon {
+    filter: drop-shadow(0 5px 8px rgba(108,99,255,0.25));
+}
+
+/* TOOL COLORS */
+
+.tool::before {
+    background: #00a884;
+}
+
+.tool .icon {
+    filter: drop-shadow(0 5px 8px rgba(0,168,132,0.25));
+}
+
+/* AI */
+
+.ai-card {
+    min-height: 170px;
+    border-radius: 25px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(108,99,255,0.95),
+            rgba(151,78,255,0.95)
+        );
+
+    color: white;
+    box-shadow: 0 18px 45px rgba(108,99,255,0.3);
+}
+
+.ai-card .desc {
+    color: rgba(255,255,255,0.75);
+}
+
+.ai-card .icon {
+    font-size: 45px;
+}
+
+.ai-card::after {
+    content: "AI";
+    position: absolute;
+    right: 25px;
+    bottom: -30px;
+    font-size: 100px;
+    font-weight: bold;
+    opacity: 0.08;
+}
+
+/* HIDE SEARCH RESULTS */
+
+.hidden {
+    display: none !important;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2,1fr);
+        gap: 12px;
+    }
+
+    .button {
+        min-height: 125px;
+        border-radius: 18px;
+    }
+
+    .icon {
+        font-size: 30px;
+    }
+
+    .name {
+        font-size: 14px;
+    }
+
+    .desc {
+        display: none;
+    }
+
+    .section-title h2 {
+        font-size: 19px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ========================================= -->
-<!-- SIDEBAR -->
-<!-- ========================================= -->
-
-<div id="overlay"></div>
-
-<aside id="sidebar">
-
-<div class="logo">
-
-<div class="logo-circle">
-<i class="fa-solid fa-galaxy"></i>
-</div>
-
-<div>
-
-<h2>Galaxy Task Sphere</h2>
-
-<p>Everything in One Place</p>
-
-</div>
-
-</div>
-
-<nav>
-
-<button class="navButton active" data-page="home">
-<i class="fa-solid fa-house"></i>
-<span>Home</span>
-</button>
-
-<button class="navButton" data-page="ai">
-<i class="fa-solid fa-robot"></i>
-<span>Nova AI</span>
-</button>
-
-<button class="navButton" data-page="games">
-<i class="fa-solid fa-gamepad"></i>
-<span>Games</span>
-</button>
-
-<button class="navButton" data-page="calculator">
-<i class="fa-solid fa-calculator"></i>
-<span>Calculator</span>
-</button>
-
-<button class="navButton" data-page="quiz">
-<i class="fa-solid fa-circle-question"></i>
-<span>Quiz</span>
-</button>
-
-<button class="navButton" data-page="clock">
-<i class="fa-regular fa-clock"></i>
-<span>Clock</span>
-</button>
-
-<button class="navButton" data-page="stopwatch">
-<i class="fa-solid fa-stopwatch"></i>
-<span>Stopwatch</span>
-</button>
-
-<button class="navButton" data-page="timer">
-<i class="fa-solid fa-hourglass-half"></i>
-<span>Timer</span>
-</button>
-
-<button class="navButton" data-page="qrcode">
-<i class="fa-solid fa-qrcode"></i>
-<span>QR Generator</span>
-</button>
-
-<button class="navButton" data-page="notes">
-<i class="fa-solid fa-note-sticky"></i>
-<span>Notes</span>
-</button>
-
-<button class="navButton" data-page="todo">
-<i class="fa-solid fa-list-check"></i>
-<span>To-Do</span>
-</button>
-
-<button class="navButton" data-page="weather">
-<i class="fa-solid fa-cloud-sun"></i>
-<span>Weather</span>
-</button>
-
-<button class="navButton" data-page="about">
-<i class="fa-solid fa-circle-info"></i>
-<span>About</span>
-</button>
-
-</nav>
-
-</aside>
-
-<!-- ========================================= -->
-<!-- MAIN -->
-<!-- ========================================= -->
-
-<div id="main">
+<div class="dashboard">
 
 <header>
 
-<button id="menuButton">
-<i class="fa-solid fa-bars"></i>
-</button>
+    <div class="logo">🚀</div>
 
-<div class="title">
+    <h1>My Dashboard</h1>
 
-<h1>Galaxy Task Sphere</h1>
-
-<p>Your complete productivity and AI workspace</p>
-
-</div>
+    <p>Games, daily tools and AI — all in one place</p>
 
 </header>
 
-<main id="content">
 
-<!-- ========================================= -->
-<!-- HOME PAGE -->
-<!-- ========================================= -->
+<!-- SEARCH + DARK MODE -->
 
-<section class="page active" id="home">
+<div class="topbar">
 
-<div class="hero">
+    <div class="search">
 
-<h1>
-Welcome to
-<span>Galaxy Task Sphere</span>
-</h1>
-
-<p>
-
-A modern workspace combining AI, Games, Utilities,
-Productivity tools and much more in a single website.
-
-</p>
-
-</div>
-
-<div class="cards">
-
-<div class="card openPage" data-open="ai">
-
-<i class="fa-solid fa-robot"></i>
-
-<h3>Nova AI</h3>
-
-<p>
-
-Powerful AI assistant capable of answering questions,
-writing code and solving problems.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="games">
-
-<i class="fa-solid fa-gamepad"></i>
-
-<h3>Games</h3>
-
-<p>
-
-Enjoy a collection of browser games without downloads.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="calculator">
-
-<i class="fa-solid fa-calculator"></i>
-
-<h3>Calculator</h3>
-
-<p>
-
-Scientific calculator with keyboard support.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="quiz">
-
-<i class="fa-solid fa-circle-question"></i>
-
-<h3>Quiz</h3>
-
-<p>
-
-Test your knowledge with interactive quizzes.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="clock">
-
-<i class="fa-regular fa-clock"></i>
-
-<h3>Clock</h3>
-
-<p>
-
-Live digital clock with date.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="stopwatch">
-
-<i class="fa-solid fa-stopwatch"></i>
-
-<h3>Stopwatch</h3>
-
-<p>
-
-Accurate stopwatch with lap recording.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="timer">
-
-<i class="fa-solid fa-hourglass-half"></i>
-
-<h3>Countdown Timer</h3>
-
-<p>
-
-Simple and elegant countdown timer.
-
-</p>
-
-</div>
-
-<div class="card openPage" data-open="qrcode">
-
-<i class="fa-solid fa-qrcode"></i>
-
-<h3>QR Generator</h3>
-
-<p>
-
-Generate QR codes instantly.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- NOVA AI -->
-<!-- ========================================= -->
-
-<section class="page" id="ai">
-
-<div class="aiContainer">
-
-<div class="chatHeader">
-
-<div class="chatTitle">
-
-<i class="fa-solid fa-robot"></i>
-
-<div>
-
-<h2>Nova AI Assistant</h2>
-
-<p>Powered by Gemini</p>
-
-</div>
-
-</div>
-
-<div class="chatActions">
-
-<button id="newChatBtn">
-<i class="fa-solid fa-plus"></i>
-New Chat
-</button>
-
-<button id="clearChatBtn">
-<i class="fa-solid fa-trash"></i>
-Clear
-</button>
-
-</div>
-
-</div>
-
-<div id="chatMessages">
-
-<div class="message ai">
-
-<div class="avatar aiAvatar">
-
-<i class="fa-solid fa-robot"></i>
-
-</div>
-
-<div class="bubble">
-
-<h3>Welcome 👋</h3>
-
-<p>
-
-Hello! I'm Nova AI.
-
-Ask me anything including:
-
-</p>
-
-<ul>
-
-<li>Programming</li>
-
-<li>Mathematics</li>
-
-<li>Science</li>
-
-<li>Writing</li>
-
-<li>Ideas</li>
-
-<li>Homework</li>
-
-<li>General Questions</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="suggestions">
-
-<button class="suggestion">
-Explain Quantum Computing
-</button>
-
-<button class="suggestion">
-Write Python Snake Game
-</button>
-
-<button class="suggestion">
-Create HTML Portfolio
-</button>
-
-<button class="suggestion">
-Tell me a joke
-</button>
-
-</div>
-
-<div class="chatInput">
-
-<textarea
-id="prompt"
-rows="1"
-placeholder="Ask Nova AI anything..."></textarea>
-
-<button id="sendButton">
-
-<i class="fa-solid fa-paper-plane"></i>
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- GAMES -->
-<!-- ========================================= -->
-
-<section class="page" id="games">
-
-<h2 class="pageHeading">
-
-<i class="fa-solid fa-gamepad"></i>
-
-Games Collection
-
-</h2>
-
-<div class="toolGrid">
-
-<div class="toolCard launchGame" data-game="snake">
-
-<i class="fa-solid fa-dragon"></i>
-
-<h3>Snake</h3>
-
-<p>Classic Snake Game</p>
-
-</div>
-
-<div class="toolCard launchGame" data-game="tictactoe">
-
-<i class="fa-solid fa-x"></i>
-
-<h3>Tic Tac Toe</h3>
-
-<p>Play against AI</p>
-
-</div>
-
-<div class="toolCard launchGame"
-data-game="memory">
-
-<i class="fa-solid fa-brain"></i>
-
-<h3>Memory</h3>
-
-<p>Improve memory</p>
-
-</div>
-
-<div class="toolCard launchGame"
-data-game="2048">
-
-<i class="fa-solid fa-table-cells-large"></i>
-
-<h3>2048</h3>
-
-<p>Reach 2048</p>
-
-</div>
-
-<div class="toolCard launchGame"
-data-game="flappy">
-
-<i class="fa-solid fa-dove"></i>
-
-<h3>Flappy Bird</h3>
-
-<p>Avoid obstacles</p>
-
-</div>
-
-<div class="toolCard launchGame"
-data-game="reaction">
-
-<i class="fa-solid fa-bolt"></i>
-
-<h3>Reaction Test</h3>
-
-<p>Test your speed</p>
-
-</div>
-
-</div>
-
-<div id="gameArea"></div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- CALCULATOR -->
-<!-- ========================================= -->
-
-<section class="page" id="calculator">
-
-<h2 class="pageHeading">
-
-<i class="fa-solid fa-calculator"></i>
-
-Calculator
-
-</h2>
-
-<div class="calculator">
-
-<input
-type="text"
-id="calcDisplay"
-readonly>
-
-<div class="calcButtons">
-
-<button>(</button>
-<button>)</button>
-<button>%</button>
-<button class="operator">÷</button>
-
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button class="operator">×</button>
-
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button class="operator">−</button>
-
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button class="operator">+</button>
-
-<button>0</button>
-<button>.</button>
-<button id="calcClear">C</button>
-<button id="calcEqual">=</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- QUIZ -->
-<!-- ========================================= -->
-
-<section class="page" id="quiz">
-
-<h2 class="pageHeading">
-
-<i class="fa-solid fa-circle-question"></i>
-
-Quiz
-
-</h2>
-
-<div class="quizBox">
-
-<h3 id="question">
-
-Loading...
-
-</h3>
-
-<div id="answers"></div>
-
-<button id="nextQuestion">
-
-Next Question
-
-</button>
-
-</div>
-
-</section>
-<!-- ========================================= -->
-<!-- CLOCK -->
-<!-- ========================================= -->
-
-<section class="page" id="clock">
-
-    <h2 class="pageHeading">
-        <i class="fa-regular fa-clock"></i>
-        Digital Clock
-    </h2>
-
-    <div class="clockContainer">
-
-        <div id="digitalClock">
-            00:00:00
-        </div>
-
-        <div id="clockDate">
-            Monday, 1 January 2026
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- STOPWATCH -->
-<!-- ========================================= -->
-
-<section class="page" id="stopwatch">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-stopwatch"></i>
-
-        Stopwatch
-
-    </h2>
-
-    <div class="stopwatchBox">
-
-        <div id="stopwatchDisplay">
-
-            00:00:00.000
-
-        </div>
-
-        <div class="stopwatchButtons">
-
-            <button id="startStopwatch">
-
-                Start
-
-            </button>
-
-            <button id="pauseStopwatch">
-
-                Pause
-
-            </button>
-
-            <button id="resetStopwatch">
-
-                Reset
-
-            </button>
-
-            <button id="lapStopwatch">
-
-                Lap
-
-            </button>
-
-        </div>
-
-        <div id="laps"></div>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- TIMER -->
-<!-- ========================================= -->
-
-<section class="page" id="timer">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-hourglass-half"></i>
-
-        Countdown Timer
-
-    </h2>
-
-    <div class="timerContainer">
-
-        <div class="timerInputs">
-
-            <input
-                id="timerHours"
-                type="number"
-                min="0"
-                max="99"
-                placeholder="HH">
-
-            <input
-                id="timerMinutes"
-                type="number"
-                min="0"
-                max="59"
-                placeholder="MM">
-
-            <input
-                id="timerSeconds"
-                type="number"
-                min="0"
-                max="59"
-                placeholder="SS">
-
-        </div>
-
-        <div id="timerDisplay">
-
-            00:00:00
-
-        </div>
-
-        <div class="timerButtons">
-
-            <button id="timerStart">
-
-                Start
-
-            </button>
-
-            <button id="timerPause">
-
-                Pause
-
-            </button>
-
-            <button id="timerReset">
-
-                Reset
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- QR CODE -->
-<!-- ========================================= -->
-
-<section class="page" id="qrcode">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-qrcode"></i>
-
-        QR Code Generator
-
-    </h2>
-
-    <div class="qrContainer">
+        <span>🔍</span>
 
         <input
-            id="qrText"
             type="text"
-            placeholder="Enter text or URL">
-
-        <button id="generateQR">
-
-            Generate QR
-
-        </button>
-
-        <div id="qrResult"></div>
+            id="search"
+            placeholder="Search games and tools..."
+            onkeyup="searchItems()"
+        >
 
     </div>
 
-</section>
-
-<!-- ========================================= -->
-<!-- NOTES -->
-<!-- ========================================= -->
-
-<section class="page" id="notes">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-note-sticky"></i>
-
-        Notes
-
-    </h2>
-
-    <div class="notesContainer">
-
-        <textarea
-            id="notesArea"
-            placeholder="Write your notes here..."></textarea>
-
-        <button id="saveNotes">
-
-            Save Notes
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- TODO -->
-<!-- ========================================= -->
-
-<section class="page" id="todo">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-list-check"></i>
-
-        To-Do List
-
-    </h2>
-
-    <div class="todoContainer">
-
-        <div class="todoInput">
-
-            <input
-                id="todoText"
-                placeholder="New Task">
-
-            <button id="addTodo">
-
-                Add
-
-            </button>
-
-        </div>
-
-        <ul id="todoList"></ul>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- WEATHER -->
-<!-- ========================================= -->
-
-<section class="page" id="weather">
-
-    <h2 class="pageHeading">
-
-        <i class="fa-solid fa-cloud-sun"></i>
-
-        Weather
-
-    </h2>
-
-    <div class="weatherContainer">
-
-        <input
-            id="weatherCity"
-            placeholder="Enter city">
-
-        <button id="getWeather">
-
-            Search
-
-        </button>
-
-        <div id="weatherResult">
-
-            Search for any city to view weather.
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ========================================= -->
-<!-- ABOUT -->
-<!-- ========================================= -->
-
-<section class="page" id="about">
-
-    <div class="aboutBox">
-
-        <h2>
-
-            Galaxy Task Sphere
-
-        </h2>
-
-        <p>
-
-            Galaxy Task Sphere is an all-in-one productivity
-            platform that combines AI, games,
-            calculators, utilities and many useful
-            tools inside a single modern website.
-
-        </p>
-
-        <div class="featureGrid">
-
-            <div class="feature">
-                <i class="fa-solid fa-robot"></i>
-                <span>AI Assistant</span>
-            </div>
-
-            <div class="feature">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>Games</span>
-            </div>
-
-            <div class="feature">
-                <i class="fa-solid fa-calculator"></i>
-                <span>Calculator</span>
-            </div>
-
-            <div class="feature">
-                <i class="fa-solid fa-qrcode"></i>
-                <span>QR Generator</span>
-            </div>
-
-            <div class="feature">
-                <i class="fa-solid fa-cloud-sun"></i>
-                <span>Weather</span>
-            </div>
-
-            <div class="feature">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Productivity</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
+    <button class="theme" onclick="toggleTheme()">
+        🌙
+    </button>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.2.1/marked.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<!-- ================= GAMES ================= -->
 
-<script src="games/snake.js"></script>
-<script src="games/tictactoe.js"></script>
-<script src="games/memory.js"></script>
-<script src="script.js"></script>
+<section>
+
+<div class="section-title">
+    <h2>🎮 Games</h2>
+    <span>5 Games</span>
+</div>
+
+<div class="grid">
+
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/memory.html">
+
+    <div class="icon">🎯</div>
+
+    <div class="name">Memory Match</div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/tictactoe.html">
+
+    <div class="icon">🧩</div>
+
+    <div class="name">Tic Tac Toe </div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/snake.html">
+
+    <div class="icon">🏆</div>
+
+    <div class="name">Snake</div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/2048.html">
+
+    <div class="icon">🚀</div>
+
+    <div class="name">2048 Ultra</div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/breakout.html">
+
+    <div class="icon">☠️</div>
+
+    <div class="name">Breakout Ultra</div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+<a class="button game searchable"
+   href="https://galaxygames-ultra.onrender.com/hangman.html">
+
+    <div class="icon">🔤</div>
+
+    <div class="name">Hangman</div>
+
+    <div class="desc">Play now</div>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= TOOLS ================= -->
+
+<section>
+
+<div class="section-title">
+    <h2>🛠️ Daily Life Tools</h2>
+    <span>7 Tools</span>
+</div>
+
+<div class="grid">
+
+
+<a class="button tool searchable"
+   href="tools/tool1/index.html">
+
+    <div class="icon">📝</div>
+
+    <div class="name">Tool 1</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool2/index.html">
+
+    <div class="icon">⏱️</div>
+
+    <div class="name">Tool 2</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool3/index.html">
+
+    <div class="icon">📅</div>
+
+    <div class="name">Tool 3</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool4/index.html">
+
+    <div class="icon">🧮</div>
+
+    <div class="name">Tool 4</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool5/index.html">
+
+    <div class="icon">📋</div>
+
+    <div class="name">Tool 5</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool6/index.html">
+
+    <div class="icon">🔐</div>
+
+    <div class="name">Tool 6</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+<a class="button tool searchable"
+   href="tools/tool7/index.html">
+
+    <div class="icon">🔧</div>
+
+    <div class="name">Tool 7</div>
+
+    <div class="desc">Open tool</div>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<!-- ================= AI ================= -->
+
+<section>
+
+<div class="section-title">
+    <h2>🤖 Artificial Intelligence</h2>
+</div>
+
+
+<a class="button ai-card searchable"
+   href="https://galaxynova-ai-official.onrender.com">
+
+    <div class="icon">🤖</div>
+
+    <div class="name">Nova AI Assistant</div>
+
+    <div class="desc">
+        Your intelligent assistant
+    </div>
+
+</a>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+/* ================= SEARCH ================= */
+
+function searchItems() {
+
+    let input =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    let items =
+        document.querySelectorAll(".searchable");
+
+    items.forEach(item => {
+
+        let text =
+            item.innerText.toLowerCase();
+
+        if (text.includes(input)) {
+
+            item.classList.remove("hidden");
+
+        } else {
+
+            item.classList.add("hidden");
+
+        }
+
+    });
+
+}
+
+
+/* ================= DARK MODE ================= */
+
+function toggleTheme() {
+
+    document.body.classList.toggle("dark");
+
+    let button =
+        document.querySelector(".theme");
+
+    if (document.body.classList.contains("dark")) {
+
+        button.innerHTML = "☀️";
+
+        localStorage.setItem("theme","dark");
+
+    } else {
+
+        button.innerHTML = "🌙";
+
+        localStorage.setItem("theme","light");
+
+    }
+
+}
+
+
+/* ================= REMEMBER THEME ================= */
+
+if (localStorage.getItem("theme") === "dark") {
+
+    document.body.classList.add("dark");
+
+    document.querySelector(".theme").innerHTML = "☀️";
+
+}
+
+</script>
 
 </body>
 </html>
